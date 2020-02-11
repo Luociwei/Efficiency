@@ -8,11 +8,14 @@
 
 #import "TestPlanVC.h"
 #import <CWGeneralManager/parseCSV.h>
+#import <CWGeneralManager/CWFileManager.h>
+#import <CWGeneralManager/NSString+Extension.h>
 #import "DebugSettingVC.h"
 #import "ColumnVC.h"
 #import "ShowingLogVC.h"
 
 static NSString *const key_index = @"INDEX";
+static NSString *const key_elapse = @"_ELAPSE";
 static NSString *const key_vaule = @"_VALUE";
 static NSString *const key_message = @"_MESSAGE";
 static NSString *const key_result = @"_RESULT";
@@ -33,12 +36,15 @@ static NSString *const key_debuging = @"debuging";
 @property (nonatomic,strong) DebugSettingVC *debugSettingVC;
 
 @property (weak) IBOutlet NSSearchField *searchField;
-@property  BOOL isStop;
+
 
 @end
 
 @implementation TestPlanVC{
     NSInteger _stepIndex;
+    BOOL _isStop;
+    NSString *_logDirPath;
+    NSString *_fileName;
 }
 
 -(void)refleshWithPath:(NSString *)path{
@@ -72,6 +78,7 @@ static NSString *const key_debuging = @"debuging";
         [mutDic setObject:@"0" forKey:key_disable];
         [mutDic setObject:@"0" forKey:key_debuging];
         
+        [mutDic setObject:@"" forKey:key_elapse];
         [mutDic setObject:@"" forKey:key_result];
         [mutDic setObject:@"" forKey:key_vaule];
         [mutDic setObject:@"" forKey:key_message];
@@ -85,7 +92,7 @@ static NSString *const key_debuging = @"debuging";
         }
         [mutDicArr addObject:mutDic];
     }
-    
+    _fileName=[path lastPathComponent];
     self.originalDatas = [NSMutableArray arrayWithArray:mutDicArr];
     self.datas= [NSMutableArray arrayWithArray:mutDicArr];;
     self.tableView.headerView.hidden=NO;
@@ -150,7 +157,7 @@ static NSString *const key_debuging = @"debuging";
         column.title = title;
         [self.tableView addTableColumn:column];
     }
-    
+    [self addColumnWithTitle:key_elapse];
     [self addColumnWithTitle:key_result];
     [self addColumnWithTitle:key_vaule];
     [self addColumnWithTitle:key_message];
@@ -158,6 +165,9 @@ static NSString *const key_debuging = @"debuging";
 }
 
 -(void)addColumnWithTitle:(NSString *)title{
+    if ([self.columnTitles containsObject:title]) {
+        return;
+    }
     NSTableColumn *column=[[NSTableColumn alloc]initWithIdentifier:title];
     column.title = column.identifier;
     [self.tableView addTableColumn:column];
@@ -166,7 +176,8 @@ static NSString *const key_debuging = @"debuging";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    _logDirPath = [[NSString cw_getUserPath]stringByAppendingString:@"/Suncode/TestPlanEditor/results"];
+    [CWFileManager cw_createFile:_logDirPath isDirectory:YES];
     // Do view setup here.
 }
 
@@ -482,6 +493,7 @@ static NSString *const key_debuging = @"debuging";
             NSString *param2 = @"";
             NSString *low = @"";
             NSString *high = @"";
+            NSString *elapse = @"";
             NSString *result = @"";
             NSString *vaule = @"";
             NSString *message = @"";
@@ -529,11 +541,13 @@ static NSString *const key_debuging = @"debuging";
                     vaule = arr[0];
                     result = arr[1];
                     message=arr[2];
+                    elapse=arr[3];
                 }
-                
+                [dic setObject:elapse forKey:key_elapse];
                 [dic setObject:vaule forKey:key_vaule];
                 [dic setObject:message forKey:key_message];
                 [dic setObject:result forKey:key_result];
+                
             }
             
 
@@ -543,23 +557,62 @@ static NSString *const key_debuging = @"debuging";
                 
             });
         }
+        
+        [self saveCsv];
     });
     
 }
 
+-(void)saveCsv{
+    NSString *localCSVPath = [NSString stringWithFormat:@"%@/%@",_logDirPath,_fileName];
+
+    NSFileManager *csvfileManager = [NSFileManager defaultManager];
+
+
+    if (![csvfileManager fileExistsAtPath:localCSVPath]) {//![csvfileManager fileExistsAtPath:localCSVPath]
+
+        [csvfileManager createFileAtPath:localCSVPath contents:nil attributes:nil];
+        NSString *stationInfo = [NSString stringWithFormat:@"app_version:%@,,,,,,,,,",@"v1.1.1"];
+        NSString *testInfo = @"";
+        testInfo = [NSMutableString stringWithFormat:@"Product,SerialNumber,Special Build Name,Special Build Description,Unit Number,Station ID,Test Pass/Fail Status,Start Time,End Time,List Of Failing Tests"];
+
+        NSString *displayName   = [NSMutableString stringWithFormat:@"Display Name---------->,,,,,,,,,"];
+        NSString *type = [NSMutableString stringWithFormat:@"Type--------->,,,,,,,,,"];
+        NSString *openLimit     = [NSMutableString stringWithFormat:@"Upper Limit------------>,,,,,,,,,"];
+        NSString *shortLimit    = [NSMutableString stringWithFormat:@"Lower Limit----------->,,,,,,,,,"];
+        NSString *unit          = [NSMutableString stringWithFormat:@"Measure Unit---------->,,,,,,,,,"];
+//        for (int i = 0; i < testItems.count; i++) {
+//            TestResultItem * item = testItems[i];
+//            stationInfo = [stationInfo stringByAppendingString:[NSString stringWithFormat:@",%d", item->Index+1]];
+//            testInfo = [testInfo stringByAppendingString:[NSString stringWithFormat:@",%@_%@",item->OriginPos,item->PinNumber]];
+//            displayName = [displayName stringByAppendingString:[NSString stringWithFormat:@",%@", displaName]];
+//            //            PDCA_Priority = [PDCA_Priority stringByAppendingString:[NSString stringWithFormat:@",%d",!_auditMode]];
+//            type =[type stringByAppendingString:[NSString stringWithFormat:@",%@", item->Type]];
+//            openLimit = [openLimit stringByAppendingString:[NSString stringWithFormat:@",%@", item->OpenLimit]];
+//            shortLimit = [shortLimit stringByAppendingString:[NSString stringWithFormat:@",%@", item->ShortLimit]];
+//            unit = [unit stringByAppendingString:[NSString stringWithFormat:@",%@",item->Unit]];
+//        }
+
+        NSString *localCSVTitle = [NSString stringWithFormat:@"%@\n%@\n%@\n%@\n%@\n%@\n%@\n",stationInfo,testInfo,displayName,type,openLimit,shortLimit,unit];
+
+        [CWFileManager cw_writeToFile:localCSVPath content:localCSVTitle];
+
+    }
+}
+
 -(NSArray *)getResponeWithFunctionName:(NSString *)function timeout:(NSString *)timeout param1:(NSString *)param1 param2:(NSString *)param2 low:(NSString *)low high:(NSString *)high index:(NSInteger)i{
     if (function.length==0) {
-        return [NSArray arrayWithObjects:@"",@"",@"", nil];
+        return [NSArray arrayWithObjects:@"",@"",@"",@"", nil];
     }
     [ShowingLogVC postNotificationWithLog:[NSString stringWithFormat:@"Run test %ld,function:%@,parameter:[%@,%@]",(long)i,function,param1,param2] type:@"DEBUG ####"];
-    
-    
+    NSDate *date = [NSDate date];
     [NSThread sleepForTimeInterval:0.2];
     NSString *vaule = [NSString stringWithFormat:@"function:%@,timeout:%@,param1:%@,param2:%@,low:%@,high:%@",function,timeout,param1,param2,low,high];
     NSString *result = @"pass";
     NSString *message = @"";
-                [ShowingLogVC postNotificationWithLog:[NSString stringWithFormat:@"Return value %@",vaule] type:@"DEBUG $$$$$$"];
-    return [NSArray arrayWithObjects:vaule,result,message, nil];
+    [ShowingLogVC postNotificationWithLog:[NSString stringWithFormat:@"Return value %@",vaule] type:@"DEBUG $$$$$$"];
+    NSString *elapse =[NSString stringWithFormat:@"%f",-[date timeIntervalSinceNow]];
+    return [NSArray arrayWithObjects:vaule,result,message,elapse, nil];
 }
 
 - (IBAction)stepClick:(NSButton *)sender {
@@ -574,6 +627,7 @@ static NSString *const key_debuging = @"debuging";
     NSString *param2 = @"";
     NSString *low = @"";
     NSString *high = @"";
+    NSString *elapse = @"";
     NSString *result = @"";
     NSString *vaule = @"";
     NSString *message = @"";
@@ -619,9 +673,6 @@ static NSString *const key_debuging = @"debuging";
     
     [dic setObject:@"1" forKey:key_debuging];
     
-    //[NSThread sleepForTimeInterval:0.1];
-    
-    
     if ([dic.allKeys containsObject:key_vaule]) {
         if (!vaule.length) {
             
@@ -629,8 +680,9 @@ static NSString *const key_debuging = @"debuging";
             vaule = arr[0];
             result = arr[1];
             message=arr[2];
+            elapse=arr[3];
         }
-        
+        [dic setObject:elapse forKey:key_elapse];
         [dic setObject:vaule forKey:key_vaule];
         [dic setObject:message forKey:key_message];
         [dic setObject:result forKey:key_result];
@@ -650,6 +702,10 @@ static NSString *const key_debuging = @"debuging";
     for (int i =0 ; i<self.originalDatas.count; i++) {
         NSMutableDictionary *dic = self.originalDatas[i];
         [dic setObject:@"0" forKey:key_debuging];
+        [dic setObject:@"" forKey:key_elapse];
+        [dic setObject:@"" forKey:key_result];
+        [dic setObject:@"" forKey:key_vaule];
+        [dic setObject:@"" forKey:key_message];
     }
     [self.tableView reloadData];
     _stepIndex=0;
