@@ -1,0 +1,18 @@
+//
+//  PrefixHeader.pch
+//  DebugTools
+//
+//  Created by ciwei luo on 2019/6/28.
+//  Copyright © 2019 ciwei luo. All rights reserved.
+//
+
+#ifdef __OBJC__
+#define AppWidth 1200
+#define AppHeight 700
+//#define pinBoxW AppWidth/30
+//#define pinBoxH pinBoxW
+#define margin 15
+#import "CWTextLabel.h"
+#import "MyEexception.h"
+#endif
+

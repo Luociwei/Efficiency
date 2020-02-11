@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>efficiencyDirPath</key>
+	<string>/vault/Suncode_log/CSV/</string>
+	<key>fileKeyWord</key>
+	<string>efficiency</string>
+	<key>checkTimeInterval</key>
+	<string>10</string>
+	<key>efficiency_5v_itemsName</key>
+	<dict>
+		<key>500mA</key>
+		<string>Charger LV_CurrentTrim Charger_efficiency_500mA@5V</string>
+		<key>1000mA</key>
+		<string>Charger LV_CurrentTrim Charger_efficiency_1000mA@5V</string>
+		<key>2000mA</key>
+		<string>Charger LV_CurrentTrim Charger_efficiency_2100mA@5V</string>
+		<key>3000mA</key>
+		<string>Charger LV_CurrentTrim Charger_efficiency_3000mA@5V</string>
+	</dict>
+	<key>efficiency_9v_itemsName</key>
+	<dict>
+		<key>500mA</key>
+		<string>Charger 9V_CurrentTrim Charger_efficiency_500mA@9V</string>
+		<key>1000mA</key>
+		<string>Charger 9V_CurrentTrim Charger_efficiency_1000mA@9V</string>
+		<key>2000mA</key>
+		<string>Charger 9V_CurrentTrim Charger_efficiency_2000mA@9V</string>
+		<key>3000mA</key>
+		<string>Charger 9V_CurrentTrim Charger_efficiency_3000mA@9V</string>
+	</dict>
+	<key>efficiency_12v_itemsName</key>
+	<dict>
+		<key>500mA</key>
+		<string>Charger 12V_CurrentTrim Charger_efficiency_500mA@12V</string>
+		<key>1000mA</key>
+		<string>Charger 12V_CurrentTrim Charger_efficiency_1000mA@12V</string>
+		<key>2000mA</key>
+		<string>Charger 12V_CurrentTrim Charger_efficiency_2000mA@12V</string>
+		<key>3000mA</key>
+		<string>Charger HCCM_TopOff Charger_efficiency_3000mA@12V</string>
+	</dict>
+	<key>efficiency_15v_itemsName</key>
+	<dict>
+		<key>500mA</key>
+		<string>Charger 15V_CurrentTrim Charger_efficiency_500mA@15V</string>
+		<key>1000mA</key>
+		<string>Charger 15V_CurrentTrim Charger_efficiency_1000mA@15V</string>
+		<key>2000mA</key>
+		<string>Charger 15V_CurrentTrim Charger_efficiency_2000mA@15V</string>
+		<key>3000mA</key>
+		<string>Charger HCCM_ACCL Charger_efficiency_3000mA@15V</string>
+	</dict>
+</dict>
+</plist>
