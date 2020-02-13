@@ -13,7 +13,7 @@
 #import "DebugSettingVC.h"
 #import "ColumnVC.h"
 #import "ShowingLogVC.h"
-
+static NSString* const kDragTableViewTypeName = @"DragTableViewTypeName";
 static NSString *const key_index = @"INDEX";
 static NSString *const key_elapse = @"_ELAPSE";
 static NSString *const key_vaule = @"_VALUE";
@@ -23,6 +23,7 @@ static NSString *const key_disable = @"disable";
 static NSString *const key_debuging = @"debuging";
 
 @interface TestPlanVC ()<NSTextFieldDelegate>
+@property (strong) IBOutlet NSMenu *editMenu;
 @property (weak) IBOutlet NSTextField *btn;
 @property (weak) IBOutlet NSButton *btnOpen;
 @property (weak) IBOutlet NSButton *btnShow;
@@ -35,6 +36,7 @@ static NSString *const key_debuging = @"debuging";
 @property (nonatomic,strong) NSMutableArray *originalDatas;
 @property (nonatomic,strong) DebugSettingVC *debugSettingVC;
 
+@property (nonatomic,strong) NSMutableArray *items_copy;
 @property (weak) IBOutlet NSSearchField *searchField;
 
 
@@ -176,7 +178,9 @@ static NSString *const key_debuging = @"debuging";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.items_copy = [NSMutableArray array];
+    self.tableView.menu=self.editMenu;
+    [self.tableView registerForDraggedTypes:@[kDragTableViewTypeName]];
     _logDirPath = [[NSString cw_getUserPath]stringByAppendingString:@"/Suncode/TestPlanEditor/results"];
     [CWFileManager cw_createFile:_logDirPath isDirectory:YES];
     // Do view setup here.
@@ -190,7 +194,50 @@ static NSString *const key_debuging = @"debuging";
     //返回表格共有多少行数据
     return [self.datas count];
 }
+- (BOOL)tableView:(NSTableView *)tv writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard*)pboard {
+    // Copy the row numbers to the pasteboard.
+    NSData *zNSIndexSetData = [NSKeyedArchiver archivedDataWithRootObject:rowIndexes];
+    [pboard declareTypes:[NSArray arrayWithObject:kDragTableViewTypeName] owner:self];
+    [pboard setData:zNSIndexSetData forType:kDragTableViewTypeName];
+    return YES;
+}
 
+- (NSDragOperation)tableView:(NSTableView*)tv validateDrop:(id <NSDraggingInfo>)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)op {
+    
+    //Add code here to validate the drop
+    //NSLog(@"validate Drop");
+    return NSDragOperationMove;
+}
+
+- (BOOL)tableView:(NSTableView *)tableView acceptDrop:(id <NSDraggingInfo>)info
+              row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+    
+    NSPasteboard* pboard = [info draggingPasteboard];
+    NSData* rowData = [pboard dataForType:kDragTableViewTypeName];
+    NSIndexSet* indexSet = [NSKeyedUnarchiver unarchiveObjectWithData:rowData];
+    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.originalDatas[idx]] ;
+        [self.items_copy addObject:dic];
+
+    }];
+    NSRange range = NSMakeRange(indexSet.firstIndex, indexSet.count);
+   
+    [self.originalDatas removeObjectsInRange:range];
+    [self.datas removeObjectsInRange:range];
+
+    
+    NSInteger index = row > indexSet.firstIndex ? row -indexSet.count : row;
+    for (NSInteger i =self.items_copy.count-1; i>=0; i--) {
+        [self.datas insertObject:self.items_copy[i] atIndex:index];
+        [self.originalDatas insertObject:self.items_copy[i] atIndex:index];
+    }
+
+    [self.tableView reloadData];
+    [self.items_copy removeAllObjects];
+  
+    return YES;
+}
 #pragma mark-  NSTableViewDelegate
 
 - (NSView *)tableView:(NSTableView *)tableView viewForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row {
@@ -268,6 +315,22 @@ static NSString *const key_debuging = @"debuging";
     
 }
 
+-(void)reloadTableViewData{
+    
+    for (int i =0; i<self.originalDatas.count; i++) {
+        NSMutableDictionary *dic = self.originalDatas[i];
+        if ([dic.allKeys containsObject:key_index]) {
+            [dic setObject:[NSString stringWithFormat:@"%d",i+1] forKey:key_index];
+        }
+    }
+    for (int i =0; i<self.datas.count; i++) {
+        NSMutableDictionary *dic = self.datas[i];
+        if ([dic.allKeys containsObject:key_index]) {
+            [dic setObject:[NSString stringWithFormat:@"%d",i+1] forKey:key_index];
+        }
+    }
+    [self.tableView reloadData];
+}
 
 
 - (IBAction)clicksss:(NSButton *)sender {
@@ -278,8 +341,7 @@ static NSString *const key_debuging = @"debuging";
     if(!rowIndexes){
         return;
     }
-    
-    
+
     [self.tableView beginUpdates];
     [self.tableView hideRowsAtIndexes:rowIndexes withAnimation:NSTableViewAnimationSlideUp];
     [self.tableView endUpdates];
@@ -329,20 +391,90 @@ static NSString *const key_debuging = @"debuging";
 }
 
 
+- (IBAction)menuClick:(NSMenuItem *)menu {
+    NSIndexSet *indexSet=self.tableView.selectedRowIndexes;
+    if (!self.datas.count || !indexSet.count) {
+        return;
+    }
 
+    
+    if ([menu.title isEqualToString:@"copy"] || [menu.title isEqualToString:@"cut"]) {
+        
+        [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+
+            NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.originalDatas[idx]] ;
+            [self.items_copy addObject:dic];
+        }];
+ 
+        if ([menu.title isEqualToString:@"cut"]) {
+            NSRange range = NSMakeRange(indexSet.firstIndex, indexSet.count);
+            [self.originalDatas removeObjectsInRange:range];
+            [self.datas removeObjectsInRange:range];
+
+        }
+       [self.tableView reloadData];
+    }
+  
+    else if ([menu.title isEqualToString:@"paste"]){
+        if (!self.items_copy.count) {
+            return;
+        }
+
+        for (NSInteger i =self.items_copy.count-1; i>=0; i--) {
+            [self.datas insertObject:self.items_copy[i] atIndex:indexSet.lastIndex+1];
+            [self.originalDatas insertObject:self.items_copy[i] atIndex:indexSet.lastIndex+1];
+        }
+        
+        [self.tableView reloadData];
+        [self.items_copy removeAllObjects];
+    }else if ([menu.title isEqualToString:@"delete"]){
+        [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.datas removeObjectAtIndex:idx];
+            [self.originalDatas removeObjectAtIndex:idx];
+        }];
+        [self.tableView reloadData];
+        
+    }else if ([menu.title isEqualToString:@"add"]){
+        NSMutableDictionary *dic = [NSMutableDictionary dictionaryWithDictionary:self.originalDatas[indexSet.lastIndex]] ;
+        [dic enumerateKeysAndObjectsUsingBlock:^(id  _Nonnull key, id  _Nonnull obj, BOOL * _Nonnull stop) {
+            [dic setObject:@"" forKey:key];
+        }];
+        [self.datas insertObject:dic atIndex:indexSet.lastIndex+1];
+        [self.originalDatas insertObject:dic atIndex:indexSet.lastIndex];
+        [self.tableView reloadData];
+        
+    }else if ([menu.title isEqualToString:@"disable"]){
+        
+        [self setTableRowsStatus:indexSet isDisable:YES];
+        
+    }else if ([menu.title isEqualToString:@"enable"]){
+ 
+        [self setTableRowsStatus:indexSet isDisable:NO];
+    }
+    
+}
+
+
+-(void)setTableRowsStatus:(NSIndexSet *)indexSet isDisable:(BOOL)isDisable{
+    if(!indexSet.count){
+        return;
+    }
+    [indexSet enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL * _Nonnull stop) {
+        NSMutableDictionary *dic = [self.datas objectAtIndex:idx];
+        NSString *state = isDisable ? @"1" : @"0";
+        [dic setObject:state forKey:key_disable];
+    }];
+    [self.tableView reloadData];
+}
 
 - (IBAction)save:(NSButton *)sender {
     
     NSSavePanel *saveDlg = [[NSSavePanel alloc]init];
-    
     saveDlg.title = @"Save File";
-    
     saveDlg.message = @"Save File";
-    
     saveDlg.allowedFileTypes = @[@"csv"];
-    
     saveDlg.nameFieldStringValue = @"J417_FCT__SystemTest_P2_V02";
-    
+    [self reloadTableViewData];
     [saveDlg beginWithCompletionHandler: ^(NSInteger result){
         
         if(result==NSFileHandlingPanelOKButton){
@@ -353,9 +485,13 @@ static NSString *const key_debuging = @"debuging";
             NSMutableString *text = [NSMutableString string];
             
             NSArray *columns = self.tableView.tableColumns;
-            for (int i =0; i<columns.count; i++) {
-                [text appendString:[columns[i] title]];
-                if (i!=columns.count-1) {
+    
+            for (int i =0; i<columns.count-4; i++) {
+        
+                NSString *title =[columns[i] title];
+           
+                [text appendString:title];
+                if (i!=columns.count-5) {
                     [text appendString:@","];
                 }else{
                     [text appendString:@"\n"];
@@ -365,10 +501,10 @@ static NSString *const key_debuging = @"debuging";
             
             for (NSDictionary *dic in self.datas) {
                 
-                for (int i =0; i<columns.count; i++) {
+                for (int i =0; i<columns.count-4; i++) {
                     NSString *key = [columns[i] title];
                     [text appendString:dic[key]];
-                    if (i!=columns.count-1) {
+                    if (i!=columns.count-5) {
                         [text appendString:@","];
                     }else{
                         [text appendString:@"\n"];
@@ -392,19 +528,8 @@ static NSString *const key_debuging = @"debuging";
 }
 
 - (IBAction)btnEnableClick:(NSButton *)sender {
-    
-    NSIndexSet  *rowIndexes = self.tableView.selectedRowIndexes;
-    
-    //如果row小于0表示没有选择行
-    if(!rowIndexes.count){
-        return;
-    }
-    for (NSInteger i = rowIndexes.firstIndex; i<rowIndexes.lastIndex+1; i++) {
-        NSMutableDictionary *dic = [self.datas objectAtIndex:i];
-        [dic setObject:@"0" forKey:@"Disable"];
-    }
-    [self.tableView reloadData];
-    
+
+    [self setTableRowsStatus:self.tableView.selectedRowIndexes isDisable:NO];
     
 }
 - (IBAction)btnShowClick:(NSButton *)sender {
@@ -429,18 +554,10 @@ static NSString *const key_debuging = @"debuging";
 }
 
 - (IBAction)btnDisableClick:(NSButton *)sender {
-    //表格当前选择的行
+
     NSIndexSet  *rowIndexes = self.tableView.selectedRowIndexes;
     
-    //如果row小于0表示没有选择行
-    if(!rowIndexes.count){
-        return;
-    }
-    for (NSInteger i = rowIndexes.firstIndex; i<rowIndexes.lastIndex+1; i++) {
-        NSMutableDictionary *dic = [self.datas objectAtIndex:i];
-        [dic setObject:@"1" forKey:key_disable];
-    }
-    [self.tableView reloadData];
+    [self setTableRowsStatus:rowIndexes isDisable:YES];
 }
 
 
@@ -481,7 +598,7 @@ static NSString *const key_debuging = @"debuging";
         return;
     }
     
-    [self.tableView reloadData];
+    [self reloadTableViewData];
     _isStop = NO;
     dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
     dispatch_async(queue, ^{
@@ -491,9 +608,7 @@ static NSString *const key_debuging = @"debuging";
             if (_isStop) {
                 return ;
             }
-            //        NSString *name = [NSString stringWithFormat:@"suncode_%d",i];
-            //        dispatch_queue_t queue = dispatch_queue_create([name cStringUsingEncoding:NSUTF8StringEncoding] , DISPATCH_QUEUE_SERIAL);
-            
+        
             NSMutableDictionary *dic = self.datas[i];
             NSString *disable=@"";
             NSString *function = @"";
@@ -570,7 +685,7 @@ static NSString *const key_debuging = @"debuging";
             
 
             dispatch_sync(dispatch_get_main_queue(), ^{
-                
+                [self.tableView scrollRowToVisible:i];
                 [self.tableView reloadDataForRowIndexes:[NSIndexSet indexSetWithIndex:i] columnIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, self.tableView.tableColumns.count)]];
                 
             });
@@ -639,8 +754,8 @@ static NSString *const key_debuging = @"debuging";
         NSMutableDictionary *dic =self.datas[i];
         if ([dic.allKeys containsObject:key_vaule]) {
             NSString *vaule = dic[key_vaule];
-            //[csvData appendString:vaule];
-            [csvData appendString:@"1"];
+            [csvData appendString:vaule];
+           // [csvData appendString:@"1"];
             if (i!=self.datas.count-1) {
                 [csvData appendString:@","];
             }
@@ -795,7 +910,7 @@ static NSString *const key_debuging = @"debuging";
         [dic setObject:@"" forKey:key_message];
     }
     [self.failItems removeAllObjects];
-    [self.tableView reloadData];
+    [self reloadTableViewData];
     _stepIndex=0;
 }
 
