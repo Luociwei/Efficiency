@@ -1,0 +1,631 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BA1051E122D58B0D006166CD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1051E022D58B0D006166CD /* AppDelegate.m */; };
+		BA1051E322D58B0E006166CD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA1051E222D58B0E006166CD /* Assets.xcassets */; };
+		BA1051E622D58B0E006166CD /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA1051E422D58B0E006166CD /* MainMenu.xib */; };
+		BA1051E922D58B0E006166CD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1051E822D58B0E006166CD /* main.m */; };
+		BA1051F422D58B0E006166CD /* EfficiencyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1051F322D58B0E006166CD /* EfficiencyTests.m */; };
+		BA1051FF22D58B0E006166CD /* EfficiencyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = BA1051FE22D58B0E006166CD /* EfficiencyUITests.m */; };
+		BA10520F22D58B60006166CD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA10520D22D58B60006166CD /* ViewController.m */; };
+		BA10521022D58B60006166CD /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA10520E22D58B60006166CD /* ViewController.xib */; };
+		BA10521322D58E14006166CD /* LineView.m in Sources */ = {isa = PBXBuildFile; fileRef = BA10521222D58E14006166CD /* LineView.m */; };
+		BA10521C22D6242B006166CD /* parseCSV.m in Sources */ = {isa = PBXBuildFile; fileRef = BA10521A22D6242B006166CD /* parseCSV.m */; };
+		BA10522222D62BB0006166CD /* Efficiency.m in Sources */ = {isa = PBXBuildFile; fileRef = BA10522122D62BB0006166CD /* Efficiency.m */; };
+		BA10522B22D6CA90006166CD /* ShowEffVC.m in Sources */ = {isa = PBXBuildFile; fileRef = BA10522922D6CA90006166CD /* ShowEffVC.m */; };
+		BA10522C22D6CA90006166CD /* ShowEffVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA10522A22D6CA90006166CD /* ShowEffVC.xib */; };
+		BA10523822D86F51006166CD /* CWTextLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA10523622D86F51006166CD /* CWTextLabel.m */; };
+		BAD77BEA22DDC18600286F03 /* efficiency.json in Resources */ = {isa = PBXBuildFile; fileRef = BAD77BE922DDC18500286F03 /* efficiency.json */; };
+		BAD77BED22DDC8E500286F03 /* EffJson.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD77BEC22DDC8E500286F03 /* EffJson.m */; };
+		BAD77BF022DDD7F700286F03 /* MyEexception.m in Sources */ = {isa = PBXBuildFile; fileRef = BAD77BEE22DDD7F600286F03 /* MyEexception.m */; };
+		BAD77C9B22DF0FF900286F03 /* Default_Efficiency.txt in Resources */ = {isa = PBXBuildFile; fileRef = BAD77C9A22DF0FF800286F03 /* Default_Efficiency.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BA1051F022D58B0E006166CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1051D422D58B0D006166CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA1051DB22D58B0D006166CD;
+			remoteInfo = Efficiency;
+		};
+		BA1051FB22D58B0E006166CD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA1051D422D58B0D006166CD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA1051DB22D58B0D006166CD;
+			remoteInfo = Efficiency;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BA1051DC22D58B0D006166CD /* Efficiency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Efficiency.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1051DF22D58B0D006166CD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BA1051E022D58B0D006166CD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BA1051E222D58B0E006166CD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BA1051E522D58B0E006166CD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		BA1051E722D58B0E006166CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA1051E822D58B0E006166CD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BA1051EA22D58B0E006166CD /* Efficiency.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Efficiency.entitlements; sourceTree = "<group>"; };
+		BA1051EF22D58B0E006166CD /* EfficiencyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfficiencyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1051F322D58B0E006166CD /* EfficiencyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EfficiencyTests.m; sourceTree = "<group>"; };
+		BA1051F522D58B0E006166CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA1051FA22D58B0E006166CD /* EfficiencyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EfficiencyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA1051FE22D58B0E006166CD /* EfficiencyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EfficiencyUITests.m; sourceTree = "<group>"; };
+		BA10520022D58B0E006166CD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BA10520C22D58B60006166CD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BA10520D22D58B60006166CD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BA10520E22D58B60006166CD /* ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ViewController.xib; sourceTree = "<group>"; };
+		BA10521122D58E14006166CD /* LineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineView.h; sourceTree = "<group>"; };
+		BA10521222D58E14006166CD /* LineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LineView.m; sourceTree = "<group>"; };
+		BA10521A22D6242B006166CD /* parseCSV.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parseCSV.m; sourceTree = "<group>"; };
+		BA10521B22D6242B006166CD /* parseCSV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = parseCSV.h; sourceTree = "<group>"; };
+		BA10521D22D6243D006166CD /* JXArcCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXArcCompatibilityMacros.h; sourceTree = "<group>"; };
+		BA10522022D62BB0006166CD /* Efficiency.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Efficiency.h; sourceTree = "<group>"; };
+		BA10522122D62BB0006166CD /* Efficiency.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Efficiency.m; sourceTree = "<group>"; };
+		BA10522822D6CA90006166CD /* ShowEffVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowEffVC.h; sourceTree = "<group>"; };
+		BA10522922D6CA90006166CD /* ShowEffVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowEffVC.m; sourceTree = "<group>"; };
+		BA10522A22D6CA90006166CD /* ShowEffVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowEffVC.xib; sourceTree = "<group>"; };
+		BA10523622D86F51006166CD /* CWTextLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWTextLabel.m; sourceTree = "<group>"; };
+		BA10523722D86F51006166CD /* CWTextLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWTextLabel.h; sourceTree = "<group>"; };
+		BAD77BE922DDC18500286F03 /* efficiency.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = efficiency.json; sourceTree = "<group>"; };
+		BAD77BEB22DDC8E500286F03 /* EffJson.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EffJson.h; sourceTree = "<group>"; };
+		BAD77BEC22DDC8E500286F03 /* EffJson.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EffJson.m; sourceTree = "<group>"; };
+		BAD77BEE22DDD7F600286F03 /* MyEexception.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyEexception.m; sourceTree = "<group>"; };
+		BAD77BEF22DDD7F700286F03 /* MyEexception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyEexception.h; sourceTree = "<group>"; };
+		BAD77C9A22DF0FF800286F03 /* Default_Efficiency.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Default_Efficiency.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA1051D922D58B0D006166CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA1051EC22D58B0E006166CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA1051F722D58B0E006166CD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BA1051D322D58B0D006166CD = {
+			isa = PBXGroup;
+			children = (
+				BA1051DE22D58B0D006166CD /* Efficiency */,
+				BA1051F222D58B0E006166CD /* EfficiencyTests */,
+				BA1051FD22D58B0E006166CD /* EfficiencyUITests */,
+				BA1051DD22D58B0D006166CD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BA1051DD22D58B0D006166CD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA1051DC22D58B0D006166CD /* Efficiency.app */,
+				BA1051EF22D58B0E006166CD /* EfficiencyTests.xctest */,
+				BA1051FA22D58B0E006166CD /* EfficiencyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA1051DE22D58B0D006166CD /* Efficiency */ = {
+			isa = PBXGroup;
+			children = (
+				BA1051DF22D58B0D006166CD /* AppDelegate.h */,
+				BA1051E022D58B0D006166CD /* AppDelegate.m */,
+				BA10520C22D58B60006166CD /* ViewController.h */,
+				BA10520D22D58B60006166CD /* ViewController.m */,
+				BA10520E22D58B60006166CD /* ViewController.xib */,
+				BA10522822D6CA90006166CD /* ShowEffVC.h */,
+				BA10522922D6CA90006166CD /* ShowEffVC.m */,
+				BA10522A22D6CA90006166CD /* ShowEffVC.xib */,
+				BA10521122D58E14006166CD /* LineView.h */,
+				BA10521222D58E14006166CD /* LineView.m */,
+				BA10523722D86F51006166CD /* CWTextLabel.h */,
+				BA10523622D86F51006166CD /* CWTextLabel.m */,
+				BA10521B22D6242B006166CD /* parseCSV.h */,
+				BA10521A22D6242B006166CD /* parseCSV.m */,
+				BA10521D22D6243D006166CD /* JXArcCompatibilityMacros.h */,
+				BA10522022D62BB0006166CD /* Efficiency.h */,
+				BA10522122D62BB0006166CD /* Efficiency.m */,
+				BAD77BE922DDC18500286F03 /* efficiency.json */,
+				BAD77BEB22DDC8E500286F03 /* EffJson.h */,
+				BAD77BEC22DDC8E500286F03 /* EffJson.m */,
+				BAD77BEF22DDD7F700286F03 /* MyEexception.h */,
+				BAD77BEE22DDD7F600286F03 /* MyEexception.m */,
+				BAD77C9A22DF0FF800286F03 /* Default_Efficiency.txt */,
+				BA1051E222D58B0E006166CD /* Assets.xcassets */,
+				BA1051E422D58B0E006166CD /* MainMenu.xib */,
+				BA1051E722D58B0E006166CD /* Info.plist */,
+				BA1051E822D58B0E006166CD /* main.m */,
+				BA1051EA22D58B0E006166CD /* Efficiency.entitlements */,
+			);
+			path = Efficiency;
+			sourceTree = "<group>";
+		};
+		BA1051F222D58B0E006166CD /* EfficiencyTests */ = {
+			isa = PBXGroup;
+			children = (
+				BA1051F322D58B0E006166CD /* EfficiencyTests.m */,
+				BA1051F522D58B0E006166CD /* Info.plist */,
+			);
+			path = EfficiencyTests;
+			sourceTree = "<group>";
+		};
+		BA1051FD22D58B0E006166CD /* EfficiencyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BA1051FE22D58B0E006166CD /* EfficiencyUITests.m */,
+				BA10520022D58B0E006166CD /* Info.plist */,
+			);
+			path = EfficiencyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BA1051DB22D58B0D006166CD /* Efficiency */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA10520322D58B0E006166CD /* Build configuration list for PBXNativeTarget "Efficiency" */;
+			buildPhases = (
+				BA1051D822D58B0D006166CD /* Sources */,
+				BA1051D922D58B0D006166CD /* Frameworks */,
+				BA1051DA22D58B0D006166CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Efficiency;
+			productName = Efficiency;
+			productReference = BA1051DC22D58B0D006166CD /* Efficiency.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BA1051EE22D58B0E006166CD /* EfficiencyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA10520622D58B0E006166CD /* Build configuration list for PBXNativeTarget "EfficiencyTests" */;
+			buildPhases = (
+				BA1051EB22D58B0E006166CD /* Sources */,
+				BA1051EC22D58B0E006166CD /* Frameworks */,
+				BA1051ED22D58B0E006166CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA1051F122D58B0E006166CD /* PBXTargetDependency */,
+			);
+			name = EfficiencyTests;
+			productName = EfficiencyTests;
+			productReference = BA1051EF22D58B0E006166CD /* EfficiencyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BA1051F922D58B0E006166CD /* EfficiencyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA10520922D58B0E006166CD /* Build configuration list for PBXNativeTarget "EfficiencyUITests" */;
+			buildPhases = (
+				BA1051F622D58B0E006166CD /* Sources */,
+				BA1051F722D58B0E006166CD /* Frameworks */,
+				BA1051F822D58B0E006166CD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA1051FC22D58B0E006166CD /* PBXTargetDependency */,
+			);
+			name = EfficiencyUITests;
+			productName = EfficiencyUITests;
+			productReference = BA1051FA22D58B0E006166CD /* EfficiencyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA1051D422D58B0D006166CD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "ciwei luo";
+				TargetAttributes = {
+					BA1051DB22D58B0D006166CD = {
+						CreatedOnToolsVersion = 10.1;
+					};
+					BA1051EE22D58B0E006166CD = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = BA1051DB22D58B0D006166CD;
+					};
+					BA1051F922D58B0E006166CD = {
+						CreatedOnToolsVersion = 10.1;
+						TestTargetID = BA1051DB22D58B0D006166CD;
+					};
+				};
+			};
+			buildConfigurationList = BA1051D722D58B0D006166CD /* Build configuration list for PBXProject "Efficiency" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BA1051D322D58B0D006166CD;
+			productRefGroup = BA1051DD22D58B0D006166CD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BA1051DB22D58B0D006166CD /* Efficiency */,
+				BA1051EE22D58B0E006166CD /* EfficiencyTests */,
+				BA1051F922D58B0E006166CD /* EfficiencyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA1051DA22D58B0D006166CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA1051E322D58B0E006166CD /* Assets.xcassets in Resources */,
+				BA10522C22D6CA90006166CD /* ShowEffVC.xib in Resources */,
+				BAD77BEA22DDC18600286F03 /* efficiency.json in Resources */,
+				BA10521022D58B60006166CD /* ViewController.xib in Resources */,
+				BAD77C9B22DF0FF900286F03 /* Default_Efficiency.txt in Resources */,
+				BA1051E622D58B0E006166CD /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA1051ED22D58B0E006166CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA1051F822D58B0E006166CD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BA1051D822D58B0D006166CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA10521322D58E14006166CD /* LineView.m in Sources */,
+				BAD77BED22DDC8E500286F03 /* EffJson.m in Sources */,
+				BA10522B22D6CA90006166CD /* ShowEffVC.m in Sources */,
+				BAD77BF022DDD7F700286F03 /* MyEexception.m in Sources */,
+				BA10520F22D58B60006166CD /* ViewController.m in Sources */,
+				BA10521C22D6242B006166CD /* parseCSV.m in Sources */,
+				BA10523822D86F51006166CD /* CWTextLabel.m in Sources */,
+				BA10522222D62BB0006166CD /* Efficiency.m in Sources */,
+				BA1051E922D58B0E006166CD /* main.m in Sources */,
+				BA1051E122D58B0D006166CD /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA1051EB22D58B0E006166CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA1051F422D58B0E006166CD /* EfficiencyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA1051F622D58B0E006166CD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA1051FF22D58B0E006166CD /* EfficiencyUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BA1051F122D58B0E006166CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA1051DB22D58B0D006166CD /* Efficiency */;
+			targetProxy = BA1051F022D58B0E006166CD /* PBXContainerItemProxy */;
+		};
+		BA1051FC22D58B0E006166CD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA1051DB22D58B0D006166CD /* Efficiency */;
+			targetProxy = BA1051FB22D58B0E006166CD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BA1051E422D58B0E006166CD /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BA1051E522D58B0E006166CD /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BA10520122D58B0E006166CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		BA10520222D58B0E006166CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		BA10520422D58B0E006166CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Efficiency/Efficiency.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Efficiency/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = lua.suncode.Efficiency;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		BA10520522D58B0E006166CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Efficiency/Efficiency.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Efficiency/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				PRODUCT_BUNDLE_IDENTIFIER = lua.suncode.Efficiency;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		BA10520722D58B0E006166CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EfficiencyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lua.suncode.EfficiencyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Efficiency.app/Contents/MacOS/Efficiency";
+			};
+			name = Debug;
+		};
+		BA10520822D58B0E006166CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EfficiencyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lua.suncode.EfficiencyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Efficiency.app/Contents/MacOS/Efficiency";
+			};
+			name = Release;
+		};
+		BA10520A22D58B0E006166CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EfficiencyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lua.suncode.EfficiencyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Efficiency;
+			};
+			name = Debug;
+		};
+		BA10520B22D58B0E006166CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = EfficiencyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = lua.suncode.EfficiencyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Efficiency;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BA1051D722D58B0D006166CD /* Build configuration list for PBXProject "Efficiency" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA10520122D58B0E006166CD /* Debug */,
+				BA10520222D58B0E006166CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA10520322D58B0E006166CD /* Build configuration list for PBXNativeTarget "Efficiency" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA10520422D58B0E006166CD /* Debug */,
+				BA10520522D58B0E006166CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA10520622D58B0E006166CD /* Build configuration list for PBXNativeTarget "EfficiencyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA10520722D58B0E006166CD /* Debug */,
+				BA10520822D58B0E006166CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA10520922D58B0E006166CD /* Build configuration list for PBXNativeTarget "EfficiencyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA10520A22D58B0E006166CD /* Debug */,
+				BA10520B22D58B0E006166CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BA1051D422D58B0D006166CD /* Project object */;
+}
